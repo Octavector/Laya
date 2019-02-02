@@ -1,0 +1,60 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin:0;
+    padding:0;
+    font-family:sans-serif;
+    font-size:100%;
+}
+
+/* ================================================ */
+/* Typography */
+/* ================================================ */
+
+h1.title{
+    font-size: 0.9em;
+    font-weight:normal;
+    padding: 0.4em 1em;
+    margin: 0;
+}
+
+/* ================================================ */
+/* Layout */
+/* ================================================ */
+
+header{
+    background:#55cdff;
+    display: flex;
+    justify-content: space-between;
+}
+
+.stage{
+   
+}
+
+.menu{
+    height:200px;
+    width:100%;
+    position: absolute;
+    bottom:0;
+    background:#f1f1f1;
+}
+
+.content{
+    width: calc(100% - 2em);
+    height: 130px;
+    border: 1px solid blue;
+    margin: 1em;
+    overflow-x: scroll;
+    display: flex;
+}
+
+.card-actor{
+    height: 50px;
+    background: red;
+    margin-left: 1em;
+    flex: 0 0 200px;
+}
+
