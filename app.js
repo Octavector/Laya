@@ -24,6 +24,16 @@
 
     function createRow(e){
         console.log('building row ' + e);
+        //1. find the matching prefab name in the PREFABS object
+        //2. within the HTML property find the parent and create the obejct
+        //3. Find the children and iterate through then creating their elements
+        //4. add to the parent and add to the DOM.
+
+        for (var prop in PREFABS) {
+            if(prop === e){
+                console.log(e + ' present!')
+            }
+        }
     }
 
     function createEl(e){
