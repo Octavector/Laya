@@ -32,7 +32,7 @@
         for (var prop in PREFABS) {
             if(prop === e){
                 //create the parent
-                let parentEl = createEl({tag:'div', classname:PREFABS[e].html.parent});
+                let parentEl = createEl({tag:'div', classname:PREFABS[e].html.parent + ' ' + e});
                 PREFABS[e].html.children.forEach((e)=>{
                     createEl({tag:'div', classname:e, parent:parentEl})
                 })
@@ -55,10 +55,10 @@
     const PREFABS = {
         prefab1:{
             html:{
-                parent:'.row',
-                children:['.el .el1','.el .el2','.el .el3','.el .el4']
-            },
-            css:''
+                parent:'row',
+                children:['el pf1_el1','el pf1_el2','el pf1_el3','el pf1_el4']
+            }
+            
 
         }
     }
