@@ -1,8 +1,8 @@
 (function(){
     const CARD_LIST = [];
-
-    const cards = document.querySelector('.cards');
-    cards.addEventListener('click',cardsClick);
+    const STAGE = document.querySelector('.stage');
+    const CARDS = document.querySelector('.cards');
+    CARDS.addEventListener('click',cardsClick);
 
     function cardsClick(e){
         if(e.target.className === 'card-actor'){
@@ -31,13 +31,23 @@
 
         for (var prop in PREFABS) {
             if(prop === e){
-                console.log(e + ' present!')
+                //create the parent
+                let parentEl = createEl({tag:'div', classname:PREFABS[e].html.parent});
+                PREFABS[e].html.children.forEach((e)=>{
+                    createEl({tag:'div', classname:e, parent:parentEl})
+                })
+                STAGE.appendChild(parentEl);
             }
         }
     }
 
-    function createEl(e){
-
+    function createEl({tag,classname,parent} = {}){
+        let e = document.createElement(tag);
+        e.setAttribute('class', classname);
+        if(parent){
+            parent.appendChild(e);
+        }
+        return e;
     }
 
     // PREFABS
