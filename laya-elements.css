@@ -43,15 +43,15 @@ Minified and given to users upon project export.
     }
   }
 
-  .pf1_el1 {
+  [data-block="pf1_el1"] {
     grid-area: pf1_el1;
   }
-  .pf1_el2 {
+  [data-block="pf1_el2"] {
     grid-area: pf1_el2;
   }
-  .pf1_el3 {
+  [data-block="pf1_el3"] {
     grid-area: pf1_el3;
   }
-  .pf1_el4 {
+  [data-block="pf1_el4"] {
     grid-area: pf1_el4;
   }
