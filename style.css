@@ -58,3 +58,9 @@ header{
     flex: 0 0 200px;
 }
 
+.el{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

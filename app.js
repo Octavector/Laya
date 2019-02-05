@@ -1,5 +1,5 @@
 (function () {
-    const CARD_LIST = [];
+    const BLOCK_LIST = [];
     const STAGE = document.querySelector('.stage');
     const CARDS = document.querySelector('.cards');
     CARDS.addEventListener('click', cardsClick);
@@ -33,18 +33,22 @@
             if (prop === e) {
                 //create the parent
                 let parentEl = createEl({ tag: 'div', classname: PREFABS[e].html.parent + ' ' + e });
-                PREFABS[e].html.blocks.forEach((e) => {
-                    createEl({ tag: 'div', block: e, parent: parentEl, classname:'el' })
+                PREFABS[e].html.blocks.forEach((e,i) => {
+                    createEl({ tag: 'div', block: e, parent: parentEl, classname:'el', content: i+1})
                 })
                 STAGE.appendChild(parentEl);
             }
         }
     }
 
-    function createEl({ tag, block, parent, classname } = {}) {
+    function createEl({ tag, block, parent, classname,content } = {}) {
         let e = document.createElement(tag);
-        if (classname) { e.setAttribute('class', classname); }
         if (block) { e.dataset.block = block; }
+        if (classname) { e.setAttribute('class', classname); }
+        if (content){
+            let txt = document.createTextNode(content);
+            e.appendChild(txt);
+        }
         if (parent) { parent.appendChild(e); }
         return e;
     }
