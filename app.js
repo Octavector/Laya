@@ -3,11 +3,12 @@
         // each entry in the list represnets a block, each contains a unique ID, reference name and the element itself.
         list:[], 
         max_id:0,
-        add(id, block, block_ref){
+        add(id, block, block_ref, raw){
             this.list.push({
                 id,
                 block_ref,
-                block
+                block,
+                raw
             });
         },
         build(){
@@ -16,9 +17,12 @@
             })
         }
     };
+
     const STAGE = document.querySelector('.stage');
     const CARDS = document.querySelector('.cards');
     CARDS.addEventListener('click', cardsClick);
+    const BTN_EXPORT = document.querySelector('.exportBtn');
+    BTN_EXPORT.addEventListener('click', exportProject);
 
     function cardsClick(e) {
         if (e.target.className === 'card-actor') {
@@ -53,7 +57,7 @@
                     createEl({ tag: 'div', block: e, parent: parentEl, classname:'el', content: i+1})
                 })
                 let id = BLOCK_LIST.max_id++;
-                BLOCK_LIST.add(id, parentEl, e);
+                BLOCK_LIST.add(id, parentEl, e, parentEl.outerHTML); //outerHTML grabs HTML string from what we've just created, not anything scraped from the page
                 BLOCK_LIST.build();
             }
         }
@@ -69,6 +73,43 @@
         }
         if (parent) { parent.appendChild(e); }
         return e;
+    }
+
+    const SAVE_DATA = (function () {
+        const a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = "display: none";
+        return function (data, fileName) {
+                blob = new Blob([data], {type: "octet/stream"}),
+                url = window.URL.createObjectURL(blob);
+            a.href = url;
+            a.download = fileName;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        };
+    }());
+
+
+    function exportProject(){
+        let html_data ='';
+        BLOCK_LIST.list.forEach((e)=>{
+            html_data += e.raw;
+        })
+        console.log(html_data);
+        let data = `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Title of the document</title>
+</head>
+        
+<body>
+${html_data}
+</body>
+        
+</html> 
+`
+        SAVE_DATA(data, 'laya-project.html');
     }
 
     // PREFABS

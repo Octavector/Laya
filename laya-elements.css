@@ -11,12 +11,13 @@ Minified and given to users upon project export.
 .row{
     display: grid;
     grid-gap: 1em;
-    margin-bottom:1em;
-    
+    margin-bottom:1em;  
     grid-auto-rows: min-content;
-
 }
 
+/* =================================================== */
+/* PREFAB 1 */
+/* =================================================== */
 .prefab1{
   grid-template-columns: auto repeat(2, minmax(auto, 200px)) auto;
   grid-template-areas:
