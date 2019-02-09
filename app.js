@@ -1,5 +1,21 @@
 (function () {
-    const BLOCK_LIST = [];
+    const BLOCK_LIST = {
+        // each entry in the list represnets a block, each contains a unique ID, reference name and the element itself.
+        list:[], 
+        max_id:0,
+        add(id, block, block_ref){
+            this.list.push({
+                id,
+                block_ref,
+                block
+            });
+        },
+        build(){
+            this.list.forEach((e)=>{
+               STAGE.appendChild(e.block);
+            })
+        }
+    };
     const STAGE = document.querySelector('.stage');
     const CARDS = document.querySelector('.cards');
     CARDS.addEventListener('click', cardsClick);
@@ -36,7 +52,9 @@
                 PREFABS[e].html.blocks.forEach((e,i) => {
                     createEl({ tag: 'div', block: e, parent: parentEl, classname:'el', content: i+1})
                 })
-                STAGE.appendChild(parentEl);
+                let id = BLOCK_LIST.max_id++;
+                BLOCK_LIST.add(id, parentEl, e);
+                BLOCK_LIST.build();
             }
         }
     }
