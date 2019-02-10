@@ -91,16 +91,30 @@
 
 
     function exportProject(){
+        //GRAB CSS
+        //varify correct CSS file?
+        //css only needs to be done once, so move out of export function and do on load?
+        let cssRuleList = Array.from(document.styleSheets[1].cssRules);
+        let cssRuleString = '';
+        cssRuleList.forEach((e)=>{
+            cssRuleString += e.cssText;
+        });
+        console.log(cssRuleString);
+
+        //GRAB HTML
         let html_data ='';
         BLOCK_LIST.list.forEach((e)=>{
             html_data += e.raw;
         })
-        console.log(html_data);
+       // console.log(html_data);
         let data = `<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Title of the document</title>
+<style>
+${cssRuleString}
+</style>
 </head>
         
 <body>
