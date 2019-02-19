@@ -64,3 +64,18 @@ header{
     align-items: center;
 }
 
+.row{
+    position: relative;
+}
+
+.row:hover{
+    background:orange;
+}
+
+.deleteBtn{
+    position: absolute;
+    width: 140px;
+    height: 80px;
+    top: calc(50% - 40px);
+    left: calc(50% - 70px);
+}

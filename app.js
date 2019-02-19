@@ -23,6 +23,7 @@
     CARDS.addEventListener('click', cardsClick);
     const BTN_EXPORT = document.querySelector('.exportBtn');
     BTN_EXPORT.addEventListener('click', exportProject);
+    window.addEventListener('mousemove',mouseManagement);
 
     function cardsClick(e) {
         if (e.target.className === 'card-actor') {
@@ -91,6 +92,37 @@
             window.URL.revokeObjectURL(url);
         };
     }());
+
+    function mouseManagement(event){
+        BLOCK_LIST.list.forEach((e)=>{
+            let box = e.block.getBoundingClientRect()
+            let deleteBtnEl = hasChild(e.block, 'deleteBtn');
+            if(event.x > box.left && event.x < box.right && event.y > box.top && event.y < box.bottom){
+                if(!deleteBtnEl){
+                    hoverDelete(e);
+                }
+            }
+            else{
+                if(deleteBtnEl){deleteBtnEl.parentElement.removeChild(deleteBtnEl);}
+            }
+        });
+    }
+
+
+    function hoverDelete(e){
+        //delete button appears
+        createEl({ tag:'button', parent:e.block, classname:'deleteBtn',content:'Delete' });
+    }
+
+    //e => parent element to search the children, classname => the classname of the child we are looking for
+    function hasChild(e,classname){
+        for(let i=0, j=e.childNodes.length; i < j; i++){
+            if(e.childNodes[i].className === classname){
+                return e.childNodes[i];
+            }
+        }
+        return null;
+    }
 
 
     function exportProject(){
