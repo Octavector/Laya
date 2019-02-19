@@ -1,6 +1,6 @@
 (function () {
     const BLOCK_LIST = {
-        // each entry in the list represnets a block, each contains a unique ID, reference name and the element itself.
+        // each entry in the list represnets a block, each contains a unique ID, reference name and the raw element itself.
         list:[], 
         max_id:0,
         add(id, block, block_ref, raw){
@@ -32,6 +32,9 @@
         switch (e.target.dataset.prefab) {
             case 'prefab1':
                 createRow('prefab1');
+                break;
+            case 'prefab2':
+                createRow('prefab2');
                 break;
 
             default:
@@ -134,8 +137,12 @@ ${html_data}
                 parent: 'row',
                 blocks: ['pf1_el1', 'pf1_el2', 'pf1_el3', 'pf1_el4']
             }
-
-
+        },
+        prefab2: {
+            html: {
+                parent: 'row',
+                blocks: ['pf2_el1', 'pf2_el2', 'pf2_el3', 'pf2_el4', 'pf2_el5', 'pf2_el6']
+            }
         }
     }
 

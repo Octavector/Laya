@@ -1,0 +1,113 @@
+/*
+Contains layout specific styles.
+Minified and given to users upon project export.
+*/
+
+.el {
+    border: 1px solid red;
+    min-height:5em;
+  }
+
+.row{
+    display: grid;
+    grid-gap: 1em;
+    margin-bottom:1em;  
+    grid-auto-rows: min-content;
+}
+
+/* =================================================== */
+/* PREFAB 1 */
+/* =================================================== */
+.prefab1{
+  grid-template-columns: auto repeat(2, minmax(auto, 200px)) auto;
+  grid-template-areas:
+  ". pf1_el1 pf1_el1 ."
+  ". pf1_el2 pf1_el2 ."
+  ". pf1_el3 pf1_el4 .";
+}
+  
+  @media (min-width: 400px) {
+    .prefab1 {
+      grid-template-columns: auto repeat(3, minmax(auto, 400px)) auto;
+      grid-template-areas:
+        ". pf1_el1 pf1_el1 pf1_el1 ."
+        ". pf1_el2 pf1_el3 pf1_el4 .";
+    }
+  }
+  
+  @media (min-width: 800px) {
+    .prefab1 {
+      grid-template-columns: auto repeat(6, minmax(auto, 200px)) auto;
+      grid-template-areas:
+        ". pf1_el1 pf1_el1 pf1_el1 pf1_el1 pf1_el2 pf1_el2 ."
+        ". pf1_el3 pf1_el3 pf1_el3 pf1_el4 pf1_el4 pf1_el4 .";
+    }
+  }
+
+  [data-block="pf1_el1"] {
+    grid-area: pf1_el1;
+  }
+  [data-block="pf1_el2"] {
+    grid-area: pf1_el2;
+  }
+  [data-block="pf1_el3"] {
+    grid-area: pf1_el3;
+  }
+  [data-block="pf1_el4"] {
+    grid-area: pf1_el4;
+  }
+
+
+/* =================================================== */
+/* PREFAB 2 */
+/* =================================================== */
+
+.prefab2{
+  grid-template-columns: auto repeat(2, minmax(auto, 200px)) auto;
+  grid-template-areas:
+  ". pf2_el1 pf2_el1 ."
+  ". pf2_el2 pf2_el2 ."
+  ". pf2_el3 pf2_el3 ."
+  ". pf2_el4 pf2_el4 ."
+  ". pf2_el5 pf2_el5 ."
+  ". pf2_el6 pf2_el6 .";
+}
+
+@media (min-width: 400px) {
+  .prefab2 {
+    grid-template-columns: auto repeat(2, minmax(auto, 400px)) auto;
+    grid-template-areas:
+      ". pf2_el1 pf2_el2 ."
+      ". pf2_el3 pf2_el4 ."
+      ". pf2_el5 pf2_el6 .";
+  }
+}
+
+
+@media (min-width: 800px) {
+  .prefab2 {
+    grid-template-columns: auto repeat(6, minmax(auto, 200px)) auto;
+    grid-template-areas:
+      ". pf2_el1 pf2_el1 pf2_el2 pf2_el2 pf2_el3 pf2_el3 ."
+      ". pf2_el4 pf2_el4 pf2_el5 pf2_el5 pf2_el6 pf2_el6 .";
+  }
+}
+
+[data-block="pf2_el1"] {
+  grid-area: pf2_el1;
+}
+[data-block="pf2_el2"] {
+  grid-area: pf2_el2;
+}
+[data-block="pf2_el3"] {
+  grid-area: pf2_el3;
+}
+[data-block="pf2_el4"] {
+  grid-area: pf2_el4;
+}
+[data-block="pf2_el5"] {
+  grid-area: pf2_el5;
+}
+[data-block="pf2_el6"] {
+  grid-area: pf2_el6;
+}
