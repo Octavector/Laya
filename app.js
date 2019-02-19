@@ -2,28 +2,32 @@
     const BLOCK_LIST = {
         // each entry in the list represnets a block, each contains a unique ID, reference name and the raw element itself.
         list:[], 
-        max_id:0,
-        add(id, block, block_ref, raw){
+        max_id:1,
+        add(id, block, block_ref, raw, deleteBtn){
             this.list.push({
                 id,
                 block_ref,
                 block,
-                raw
+                raw,
+                deleteBtn
             });
         },
         build(){
+            clearElement(STAGE);
             this.list.forEach((e)=>{
-               STAGE.appendChild(e.block);
+                //keeping the delete buttons seperate so that we dont scoop them up into 'list' in error
+                e.block.appendChild(e.deleteBtn);
+                STAGE.appendChild(e.block);
             })
         }
     };
 
     const STAGE = document.querySelector('.stage');
+    STAGE.addEventListener('click', stageClick);
     const CARDS = document.querySelector('.cards');
     CARDS.addEventListener('click', cardsClick);
     const BTN_EXPORT = document.querySelector('.exportBtn');
     BTN_EXPORT.addEventListener('click', exportProject);
-    window.addEventListener('mousemove',mouseManagement);
 
     function cardsClick(e) {
         if (e.target.className === 'card-actor') {
@@ -61,22 +65,30 @@
                     createEl({ tag: 'div', block: e, parent: parentEl, classname:'el', content: i+1})
                 })
                 let id = BLOCK_LIST.max_id++;
-                BLOCK_LIST.add(id, parentEl, e, parentEl.outerHTML); //outerHTML grabs HTML string from what we've just created, not anything scraped from the page
-                BLOCK_LIST.build();
+                let deleteBtn =  createEl({ tag:'button', parent:e.block, classname:'deleteBtn',content:'Delete', id:id }); 
+                BLOCK_LIST.add(id, parentEl, e, parentEl.outerHTML, deleteBtn); //outerHTML grabs HTML string from what we've just created, not anything scraped from the page
+                BLOCK_LIST.build(id);
             }
         }
     }
 
-    function createEl({ tag, block, parent, classname,content } = {}) {
+    function createEl({ tag, block, parent, classname,content, id } = {}) {
         let e = document.createElement(tag);
         if (block) { e.dataset.block = block; }
         if (classname) { e.setAttribute('class', classname); }
+        if (id) {e.dataset.id = id;}
         if (content){
             let txt = document.createTextNode(content);
             e.appendChild(txt);
         }
         if (parent) { parent.appendChild(e); }
         return e;
+    }
+
+    function clearElement(el){
+        while (el.firstChild) {
+            el.removeChild(el.firstChild);
+        }
     }
 
     const SAVE_DATA = (function () {
@@ -93,35 +105,16 @@
         };
     }());
 
-    function mouseManagement(event){
-        BLOCK_LIST.list.forEach((e)=>{
-            let box = e.block.getBoundingClientRect()
-            let deleteBtnEl = hasChild(e.block, 'deleteBtn');
-            if(event.x > box.left && event.x < box.right && event.y > box.top && event.y < box.bottom){
-                if(!deleteBtnEl){
-                    hoverDelete(e);
-                }
-            }
-            else{
-                if(deleteBtnEl){deleteBtnEl.parentElement.removeChild(deleteBtnEl);}
-            }
-        });
-    }
-
-
-    function hoverDelete(e){
-        //delete button appears
-        createEl({ tag:'button', parent:e.block, classname:'deleteBtn',content:'Delete' });
-    }
-
-    //e => parent element to search the children, classname => the classname of the child we are looking for
-    function hasChild(e,classname){
-        for(let i=0, j=e.childNodes.length; i < j; i++){
-            if(e.childNodes[i].className === classname){
-                return e.childNodes[i];
-            }
+    function stageClick(e){
+        if(e.target.className === 'deleteBtn'){
+            deleteRow();
         }
-        return null;
+    }
+
+    function deleteRow(){
+        BLOCK_LIST.list.forEach((e)=>{
+            console.log(e);
+        })
     }
 
 
@@ -180,13 +173,3 @@ ${html_data}
 
 }())
 
-
-/*
-prefab1:
-<div class="row">
-  <div class="el el1">1</div>
-  <div class="el el2">2</div>
-  <div class="el el3">3</div>
-  <div class="el el4">4</div>
-</div>
-*/
