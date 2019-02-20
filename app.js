@@ -122,9 +122,8 @@
 
     function minimizeMenu(e){
         MENU_BAR.classList.toggle('minimize');
-        if(e.target.classList.contains('minimizeBtn')){
-            console.log('yo');
-        }
+        let el = e.target;
+        el.textContent = el.textContent === 'Minimize' ? 'Maximize' : 'Minimize';
     }
 
 
