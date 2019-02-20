@@ -77,10 +77,12 @@ header{
 .deleteBtn{
     display:none;
     position: absolute;
-    width: 140px;
+    width: 80px;
     height: 80px;
     top: calc(50% - 40px);
-    left: calc(50% - 70px);
+    left: calc(50% - 40px);
+    border-radius: 50%;
+    border: 0;
 }
 
 .row:hover .deleteBtn{
