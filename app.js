@@ -26,8 +26,11 @@
     STAGE.addEventListener('click', stageClick);
     const CARDS = document.querySelector('.cards');
     CARDS.addEventListener('click', cardsClick);
+    const BTN_MINIMIZE = document.querySelector('.minimizeBtn');
+    BTN_MINIMIZE.addEventListener('click', minimizeMenu);
     const BTN_EXPORT = document.querySelector('.exportBtn');
     BTN_EXPORT.addEventListener('click', exportProject);
+    const MENU_BAR = document.querySelector('.menu');
 
     function cardsClick(e) {
         if (e.target.className === 'card-actor') {
@@ -115,6 +118,13 @@
         BLOCK_LIST.list.forEach((e)=>{
             console.log(e);
         })
+    }
+
+    function minimizeMenu(e){
+        MENU_BAR.classList.toggle('minimize');
+        if(e.target.classList.contains('minimizeBtn')){
+            console.log('yo');
+        }
     }
 
 

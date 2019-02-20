@@ -30,9 +30,6 @@ header{
     justify-content: space-between;
 }
 
-.stage{
-   
-}
 
 .menu{
     height:200px;
@@ -40,6 +37,11 @@ header{
     position: fixed;
     bottom:0;
     background:#f1f1f1;
+    transition: bottom 0.3s;
+}
+
+.menu.minimize{
+    bottom:-172px;
 }
 
 .cards{
